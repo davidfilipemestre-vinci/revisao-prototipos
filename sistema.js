@@ -91,7 +91,8 @@ const SUPABASE_URL = 'https://xatulphpgychgztxsukw.supabase.co';
       presentationId: row.presentation_id,
       presentationName: data?.name || 'Apresentação',
       projectName: data?.projects?.name || '',
-      text: row.text
+      text: row.text,
+      createdAt: row.created_at
     });
     updateNotifBell();
   }
@@ -115,11 +116,17 @@ const SUPABASE_URL = 'https://xatulphpgychgztxsukw.supabase.co';
       dd.innerHTML = '<div class="notif-empty">Sem notificações novas</div>';
       return;
     }
-    dd.innerHTML = state.notifications.map((n, i) => `
+    dd.innerHTML = state.notifications.map((n, i) => {
+      const time = new Date(n.createdAt).toLocaleString('pt-PT', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+      return `
       <div class="notif-item" onclick="openNotification(${i})">
-        <div style="font-weight:600;margin-bottom:3px;">${esc(n.projectName)} &rsaquo; ${esc(n.presentationName)}</div>
-        <div style="color:var(--ink-soft);">${esc(n.text.slice(0, 60))}${n.text.length > 60 ? '…' : ''}</div>
-      </div>`).join('');
+        <div style="display:flex; align-items:center; gap:6px; margin-bottom:4px;">
+          <span style="font-weight:600;">${esc(n.projectName)} &rsaquo; ${esc(n.presentationName)}</span>
+        </div>
+        <div style="color:var(--ink-soft); margin-bottom:4px;">${esc(n.text.slice(0, 60))}${n.text.length > 60 ? '…' : ''}</div>
+        <div style="font-size:11px; color:var(--ink-mute);">${time}</div>
+      </div>`;
+    }).join('');
   }
   async function openNotification(i){
     const n = state.notifications[i];
@@ -307,10 +314,9 @@ const SUPABASE_URL = 'https://xatulphpgychgztxsukw.supabase.co';
       updateReviewDynamic();
     }
   });
-  function toggleCommentPanelAndMode(){
-    const opening = !state.commentsVisible;
-    state.commentsVisible = opening;
-    state.commentMode = opening;
+  function toggleCommentMode(){
+    state.commentMode = !state.commentMode;
+    if(state.commentMode){ state.commentsVisible = true; }
     updateReviewDynamic();
   }
   function closeCommentPanel(){
@@ -390,7 +396,7 @@ const SUPABASE_URL = 'https://xatulphpgychgztxsukw.supabase.co';
       return;
     }
     topbarEl.style.display = 'flex';
-    document.getElementById('notif-wrap').classList.toggle('hidden', !isEquipa());
+    document.getElementById('notif-wrap').classList.toggle('hidden', !isEquipa() || state.screen === 'review');
 
     if(state.screen === 'not-found'){
       pageEl.className = 'page';
@@ -425,7 +431,7 @@ const SUPABASE_URL = 'https://xatulphpgychgztxsukw.supabase.co';
       crumb.innerHTML = 'Revisão de protótipos &rsaquo; ' + esc(p?.projects?.name || '') + ' &rsaquo; <b>' + esc(p?.name || '') + '</b>';
       if(!blocked){
         topRight.innerHTML = `
-          <button class="comment-toggle-btn" id="toggle-btn" onclick="toggleCommentPanelAndMode()">
+          <button class="comment-toggle-btn" id="toggle-btn" onclick="toggleCommentMode()">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
             <span id="toggle-label">Fazer comentário</span>
           </button>`;
@@ -679,9 +685,9 @@ const SUPABASE_URL = 'https://xatulphpgychgztxsukw.supabase.co';
 
     const toggleBtn = document.getElementById('toggle-btn');
     if(toggleBtn){
-      toggleBtn.classList.toggle('active', state.commentsVisible);
+      toggleBtn.classList.toggle('active', state.commentMode);
       const label = document.getElementById('toggle-label');
-      label.textContent = !state.commentsVisible ? 'Fazer comentário' : (state.commentMode ? 'Clique no protótipo...' : 'Fechar comentários');
+      label.textContent = state.commentMode ? 'Clique no protótipo...' : 'Fazer comentário';
     }
   }
 
