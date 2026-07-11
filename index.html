@@ -14,12 +14,21 @@
 <div class="topbar">
   <button class="icon-btn hidden" id="back-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
   <span class="crumb" id="crumb">Revisão de protótipos</span>
-  <div id="topbar-right" style="margin-left:auto; display:flex; gap:8px;"></div>
+  <div id="topbar-right" style="margin-left:auto; display:flex; align-items:center; gap:8px;">
+    <div class="notif-wrap hidden" id="notif-wrap">
+      <button class="icon-btn" id="notif-bell" onclick="toggleNotifDropdown()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 21h4M5 8a7 7 0 0 1 14 0c0 4 1.5 6 2 7H3c.5-1 2-3 2-7Z"/></svg>
+        <span class="notif-badge hidden" id="notif-badge">0</span>
+      </button>
+      <div class="notif-dropdown hidden" id="notif-dropdown"></div>
+    </div>
+    <div id="topbar-actions" style="display:flex; gap:8px;"></div>
+  </div>
 </div>
 <div class="page" id="page"><p style="color:var(--ink-soft); font-size:13px;">A carregar...</p></div>
 <div id="modal-root"></div>
 <div class="toast" id="toast"></div>
- 
+
 <script src="sistema.js"></script>
 </body>
 </html>
