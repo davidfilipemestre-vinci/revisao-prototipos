@@ -275,6 +275,7 @@ const SUPABASE_URL = 'https://xatulphpgychgztxsukw.supabase.co';
       u.hostname = 'embed.figma.com';
       u.searchParams.set('client-id', FIGMA_CLIENT_ID);
       u.searchParams.set('embed-host', 'revisao-prototipos');
+      u.searchParams.set('hide-ui', '1');
       return u.toString();
     }catch(e){ return null; }
   }
