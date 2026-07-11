@@ -139,9 +139,8 @@ const SUPABASE_URL = 'https://xatulphpgychgztxsukw.supabase.co';
       const time = new Date(n.createdAt).toLocaleString('pt-PT', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
       return `
       <div class="notif-item" onclick="openNotification(${i})">
-        <div style="display:flex; align-items:center; gap:6px; margin-bottom:4px;">
-          <span style="font-weight:600;">${esc(n.projectName)} &rsaquo; ${esc(n.presentationName)}</span>
-        </div>
+        <div style="font-size:11px; color:var(--ink-mute); margin-bottom:2px;">${esc(n.projectName)}</div>
+        <div style="font-weight:700; font-size:13.5px; margin-bottom:5px;">${esc(n.presentationName)}</div>
         <div style="color:var(--ink-soft); margin-bottom:4px;">${esc(n.text.slice(0, 60))}${n.text.length > 60 ? '…' : ''}</div>
         <div style="font-size:11px; color:var(--ink-mute);">${time}</div>
       </div>`;
