@@ -165,3 +165,12 @@
   .notif-item:hover{background:var(--paper);}
   .notif-item:last-child{border-bottom:none;}
   .notif-empty{padding:20px; text-align:center; font-size:12.5px; color:var(--ink-soft);}
+
+  .inactivity-banner{
+    background:#fff4e5; color:#7a4a00; font-size:12.5px; padding:10px 44px 10px 20px;
+    display:flex; align-items:center; justify-content:center; gap:12px; text-align:center; position:relative;
+  }
+  .inactivity-banner button{
+    position:absolute; right:14px; top:50%; transform:translateY(-50%);
+    background:none; border:none; font-size:18px; line-height:1; cursor:pointer; color:#7a4a00;
+  }
