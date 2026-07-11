@@ -151,4 +151,5 @@
  
   .unavailable{max-width:420px; margin:100px auto; text-align:center;}
   .unavailable .icon{width:44px; height:44px; border-radius:50%; background:var(--danger-soft); color:var(--danger); display:flex; align-items:center; justify-content:center; margin:0 auto 16px; font-size:19px;}
- 
+
+  
