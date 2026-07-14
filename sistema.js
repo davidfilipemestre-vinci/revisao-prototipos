@@ -431,14 +431,14 @@ const SUPABASE_URL = 'https://xatulphpgychgztxsukw.supabase.co';
 
     if(state.screen === 'not-found'){
       pageEl.className = 'page';
-      crumb.textContent = 'Revisão de protótipos';
+      crumb.textContent = 'Revisão de produtos';
       renderNotFound();
       return;
     }
 
     if(state.screen === 'projects'){
       pageEl.className = 'page';
-      crumb.textContent = 'Revisão de protótipos';
+      crumb.textContent = 'Revisão de produtos';
       topRight.innerHTML = `<button class="icon-btn" title="Terminar sessão" onclick="logout()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg></button>`;
       renderProjects();
     }
@@ -447,7 +447,7 @@ const SUPABASE_URL = 'https://xatulphpgychgztxsukw.supabase.co';
       const project = currentProject();
       backBtn.classList.remove('hidden');
       backBtn.onclick = () => { state.screen = 'projects'; render(); };
-      crumb.innerHTML = 'Revisão de protótipos &rsaquo; <b>' + esc(project ? project.name : '') + '</b>';
+      crumb.innerHTML = 'Revisão de produtos &rsaquo; <b>' + esc(project ? project.name : '') + '</b>';
       topRight.innerHTML = `<button class="icon-btn" title="Terminar sessão" onclick="logout()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg></button>`;
       renderDetail();
     }
@@ -459,7 +459,7 @@ const SUPABASE_URL = 'https://xatulphpgychgztxsukw.supabase.co';
         backBtn.classList.remove('hidden');
         backBtn.onclick = () => { state.screen = 'detail'; render(); };
       }
-      crumb.innerHTML = 'Revisão de protótipos &rsaquo; ' + esc(p?.projects?.name || '') + ' &rsaquo; <b>' + esc(p?.name || '') + '</b>';
+      crumb.innerHTML = 'Revisão de produtos &rsaquo; ' + esc(p?.projects?.name || '') + ' &rsaquo; <b>' + esc(p?.name || '') + '</b>';
       if(!blocked){
         topRight.innerHTML = `
           <button class="comment-toggle-btn" id="toggle-btn" onclick="toggleCommentMode()">
@@ -477,13 +477,13 @@ const SUPABASE_URL = 'https://xatulphpgychgztxsukw.supabase.co';
         <div class="brand-side">
           <div class="brand-mark">
             <img src="logo-branco.webp" alt="Logótipo" id="brand-logo">
-            <span>Revisão de protótipos</span>
+            <span>Revisão de produtos</span>
           </div>
           <div class="brand-copy">
-            <h1>Apresente protótipos ao cliente, sem abrir as portas do Figma.</h1>
-            <p>Partilhe apenas o que o cliente precisa de ver, e receba o feedback dele organizado num só lugar, sem trocas de ficheiros por email.</p>
+            <h1>S&amp;H Product Portal</h1>
+            <p>A plataforma Axians para partilha de propostas de UX/UI.</p>
           </div>
-          <div class="brand-footer">Ferramenta interna · Equipa de Design</div>
+          <div class="brand-footer">Ferramenta interna - S&amp;H Design</div>
         </div>
         <div class="form-side">
           <div class="login-card">
@@ -554,7 +554,7 @@ const SUPABASE_URL = 'https://xatulphpgychgztxsukw.supabase.co';
           <button class="icon-btn on-light" title="Copiar link de apresentação" onclick="copyLink('${pr.id}')">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a3.5 3.5 0 0 0 5 0l4-4a3.5 3.5 0 0 0-5-5l-1.5 1.5"/><path d="M14 10a3.5 3.5 0 0 0-5 0l-4 4a3.5 3.5 0 0 0 5 5l1.5-1.5"/></svg>
           </button>
-          <button class="icon-btn on-light" title="Ver protótipo" onclick="openReview('${pr.id}')">
+          <button class="icon-btn on-light" title="Ver produto" onclick="openReview('${pr.id}')">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
           </button>
           <button class="icon-btn on-light" title="Configurar apresentação" onclick="openPresentationModal('${pr.id}')">
@@ -718,7 +718,7 @@ const SUPABASE_URL = 'https://xatulphpgychgztxsukw.supabase.co';
     if(toggleBtn){
       toggleBtn.classList.toggle('active', state.commentMode);
       const label = document.getElementById('toggle-label');
-      label.textContent = state.commentMode ? 'Clique no protótipo...' : 'Fazer comentário';
+      label.textContent = state.commentMode ? 'Clique no produto...' : 'Fazer comentário';
     }
   }
 
